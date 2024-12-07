@@ -8,8 +8,6 @@ dotenv.config();
 
 const token = process.env.DISCORD_TOKEN;
 const geminiApiKey = process.env.GEMINI_API_KEY;
-const PORT = process.env.PORT || 3000;
-
 
 app.get('/', (req: Request, res: Response) => {
     res.send('Hello, Discord Bot with Express and TypeScript!');
@@ -85,7 +83,6 @@ client.once('ready', () => {
 
 client.login(token).catch(console.error); // Menangani kesalahan login
 
-// Menjalankan server
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
+app.listen(3000, '0.0.0.0', () => {
+    console.log(`Server is running on port 3000`);
 });
