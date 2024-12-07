@@ -1,11 +1,19 @@
 import { Client, GatewayIntentBits } from "discord.js";
 import dotenv from "dotenv";
-import axios from "axios"; // Impor axios
+import axios from "axios";
+import express, { Request, Response } from 'express';
+const app = express();
 
 dotenv.config();
 
 const token = process.env.DISCORD_TOKEN;
 const geminiApiKey = process.env.GEMINI_API_KEY;
+const PORT = process.env.PORT || 3000;
+
+
+app.get('/', (req: Request, res: Response) => {
+    res.send('Hello, Discord Bot with Express and TypeScript!');
+});
 
 const client = new Client({
     intents: [
@@ -71,9 +79,13 @@ client.on('messageCreate', async (message) => {
 });
 
 
-
 client.once('ready', () => {
     console.log('Bot is online!');
 });
 
 client.login(token).catch(console.error); // Menangani kesalahan login
+
+// Menjalankan server
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
